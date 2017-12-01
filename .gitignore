@@ -1,32 +1,110 @@
-# Prerequisites
-*.d
+#include "RPS.h"
+#include <iostream>
+#include <stdlib.h>
+#include <ctime>
+#include <string>
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+using namespace std;
 
-# Precompiled Headers
-*.gch
-*.pch
+bool rockPaperScissors();
+//bool practiceMath();
+//bool headsTails();
+void mainMenu();
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+int main()
+{
+	srand((unsigned int)time(NULL));
 
-# Fortran module files
-*.mod
-*.smod
+	
+	mainMenu();
+	
+	
+	system("PAUSE");
+	return 0;
+}
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+void mainMenu()
+{
+	char selection;
+	bool continueExecuting = false;
 
-# Executables
-*.exe
-*.out
-*.app
+	do
+	{
+		cout << "Please choose what you would like to do:\n"
+			<< "a) Play ROCk PAPER SCISSORS\n"
+			<< "b) Practice Math\n"
+			<< "c) Play HEADS or TAILS\n"
+			<< "0) Quit" << endl;
+		cin >> selection;
+
+		if (selection == 'a')
+		{
+			continueExecuting = rockPaperScissors();
+		}
+		/*else if (selection == 'b')
+		{
+			continueExecuting = headsTails();
+		}
+		else if (selection == 'c')
+		{
+			continueExecuting = practiceMath();
+		}*/
+		else if (selection == '0')
+		{
+			cout << "Goodbye" << endl;
+			continueExecuting = false;
+		}
+	} while (continueExecuting);
+}
+
+bool rockPaperScissors()
+{
+	int randNum = 0;
+	int choice;
+	string choiceForm;
+	RPS game;
+	
+	do
+	{
+		cout << "Please choose from the following options:\n"
+			<< "1) ROCK\n"
+			<< "2) PAPER\n"
+			<< "3) SCISSORS\n"
+			<< "0) quit\n" 
+			<< "9) Main Menu" << endl;
+		cin >> choice;
+
+		if (choice == 1 || choice == 2 || choice == 3)
+		{
+			if (choice == 1)
+			{
+				choiceForm = "ROCK";
+				game.playerChoice(choiceForm);
+			}
+			else if (choice == 2)
+			{
+				choiceForm = "PAPER";
+				game.playerChoice(choiceForm);
+			}
+			else if (choice == 3)
+			{
+				choiceForm = "SCISSORS";
+				game.playerChoice(choiceForm);
+			}
+			game.compChoice();
+			cout << "You chose " << choiceForm << endl;
+			cout << "The computer chose " << game.getForm() << endl;	
+			cout << "You " << game.result() << endl;
+		}
+		else if (choice == 9)
+		{
+			return true;
+		}
+		
+
+		
+
+	} while (choice != 0);
+	return false;
+}
+
